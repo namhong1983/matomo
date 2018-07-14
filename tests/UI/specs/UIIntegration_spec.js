@@ -632,8 +632,7 @@ describe("UIIntegrationTest", function () { // TODO: Rename to Piwik?
         await page.goto("?module=CoreAdminHome&action=optOut&language=de");
         await page.waitForNetworkIdle();
 
-        pageWrap = await page.$('.pageWrap');
-        expect(await pageWrap.screenshot()).to.matchImage('admin_privacy_optout_iframe');
+        expect(await page.screenshot({ fullPage: true })).to.matchImage('admin_privacy_optout_iframe');
     });
 
     it('should load the Settings > Mobile Messaging admin page correctly', async function () {
