@@ -30,6 +30,7 @@ describe("Marketplace", function () {
 
     async function captureSelector(screenshotName, selector)
     {
+        await page.waitForNetworkIdle();
         await page.waitForFunction("$('" + selector + "').length > 0");
         expect(await page.screenshotSelector(selector)).to.matchImage(screenshotName);
     }
