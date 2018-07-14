@@ -133,7 +133,7 @@ describe("Marketplace", function () {
             setEnvironment(mode, noLicense);
 
             var isFree = true;
-            loadPluginDetailPage(page, 'TreemapVisualization', isFree);
+            await loadPluginDetailPage(page, 'TreemapVisualization', isFree);
 
             await captureWithDialog('free_plugin_details_' + mode);
         });
@@ -143,7 +143,7 @@ describe("Marketplace", function () {
 
             assumePaidPluginsActivated();
             var isFree = false;
-            loadPluginDetailPage(page, 'PaidPlugin1', isFree);
+            await loadPluginDetailPage(page, 'PaidPlugin1', isFree);
 
             await captureWithDialog('paid_plugin_details_no_license_' + mode);
         });
@@ -153,7 +153,7 @@ describe("Marketplace", function () {
 
             assumePaidPluginsActivated();
             var isFree = false;
-            loadPluginDetailPage(page, 'PaidPlugin1', isFree);
+            await loadPluginDetailPage(page, 'PaidPlugin1', isFree);
 
             await captureWithDialog('paid_plugin_details_valid_license_' + mode + '_installed');
         });
@@ -163,7 +163,7 @@ describe("Marketplace", function () {
 
             assumePaidPluginsActivated();
             var isFree = false;
-            loadPluginDetailPage(page, 'PaidPlugin1', isFree);
+            await loadPluginDetailPage(page, 'PaidPlugin1', isFree);
 
             await captureWithDialog('paid_plugin_details_exceeded_license_' + mode);
         });
@@ -204,7 +204,7 @@ describe("Marketplace", function () {
         setEnvironment(mode, noLicense);
 
         elem = await page.jQuery('.modal.open .modal-footer a:contains(Yes)')
-        elem.click();
+        await elem.click();
 
         await captureMarketplace(mode + '_remove_license_key_confirmed');
     });
