@@ -21,16 +21,19 @@ describe("CoreUpdaterCode", function () {
 
     it("should offer to retry using https when updating over https fails", async function() {
         await page.click('#updateAutomatically');
+        await page.waitForNetworkIdle();
         expect(await page.screenshot({ fullPage: true })).to.matchImage('httpsUpdateFail');
     });
 
     it("should offer to retry over http when updating over https fails", async function() {
         await page.click('#updateUsingHttps');
+        await page.waitForNetworkIdle();
         expect(await page.screenshot({ fullPage: true })).to.matchImage('httpsUpdateFail');
     });
 
     it("should show the update steps when updating over http succeeds", async function() {
         await page.click('#updateUsingHttp');
+        await page.waitForNetworkIdle();
         expect(await page.screenshot({ fullPage: true })).to.matchImage('httpUpdateSuccess');
     });
 });
