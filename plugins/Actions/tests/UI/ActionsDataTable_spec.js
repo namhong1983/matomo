@@ -125,9 +125,9 @@ describe("ActionsDataTable", function () {
         await page.waitForNetworkIdle();
 
         const first = await page.jQuery('tr .value:contains("blog")');
-        first.click();
+        await first.click();
         const second = await page.jQuery('tr .value:contains("2012")');
-        second.click();
+        await second.click();
 
         await page.waitForNetworkIdle();
 
