@@ -40,7 +40,7 @@ describe("Login", function () {
         expect(await page.screenshot({ fullPage: true })).to.matchImage('login_fail');
     });
 
-    it("should redirect to Piwik when correct credentials are supplied", async function() {
+    it("should redirect to Matomo when correct credentials are supplied", async function() {
         await page.type("#login_form_login", "superUserLogin");
         await page.type("#login_form_password", "superUserPass");
         await page.click("#login_form_submit");
@@ -52,6 +52,7 @@ describe("Login", function () {
 
     it("should redirect to login when logout link clicked", async function() {
         await page.click("nav .right .icon-sign-out");
+        await page.waitForNetworkIdle();
 
         expect(await page.screenshot({ fullPage: true })).to.matchImage('login_form');
     });
