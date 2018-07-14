@@ -121,9 +121,7 @@ describe("ActionsDataTable", function () {
     it("should automatically expand subtables if it contains only one folder", async function() {
         await page.goto(url + '&viewDataTable=table');
 
-        await page.waitForSelector('.dataTable');
-        await page.waitForNetworkIdle();
-
+        await page.waitForFunction("$('tr .value:contains(\"blog\")').length > 0");
         const first = await page.jQuery('tr .value:contains("blog")');
         await first.click();
         const second = await page.jQuery('tr .value:contains("2012")');
