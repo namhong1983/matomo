@@ -409,7 +409,7 @@ describe("UIIntegrationTest", function () { // TODO: Rename to Piwik?
 
     it('should update the evolution chart if a sparkline is clicked', async function () {
         elem = await page.jQuery('.sparkline.linked:contains(%)');
-        elem.click();
+        await elem.click();
 
         expect(await page.screenshotSelector('.pageWrap,.dataTable')).to.matchImage('goals_individual_goal_updated');
     });
@@ -873,27 +873,27 @@ describe("UIIntegrationTest", function () { // TODO: Rename to Piwik?
 
     // extra segment tests
     it('should load the row evolution page correctly when a segment is selected', async function() {
-            url = "?module=CoreHome&action=index&idSite=1&period=year&date=2012-01-13#?category=General_Visitors&subcategory=CustomVariables_CustomVariables&idSite=1&period=year&date=2012-01-13";
-            await page.goto(url);
-            await page.waitForSelector('.segmentationTitle');
-            await page.click('.segmentationTitle');
-            await page.waitFor(100);
-            segment = await page.jQuery('.segname:contains(From Europe)');
-            await segment.click();
-            await page.waitFor(250);
-            await page.waitForNetworkIdle();
+        const url = "?module=CoreHome&action=index&idSite=1&period=year&date=2012-01-13#?category=General_Visitors&subcategory=CustomVariables_CustomVariables&idSite=1&period=year&date=2012-01-13";
+        await page.goto(url);
+        const segmentTitle = await page.waitForSelector('.segmentationTitle');
+        await segmentTitle.click();
+        await page.waitFor(250);
+        const segment = await page.jQuery('.segname:contains(From Europe)');
+        await segment.click();
+        await page.waitFor(250);
+        await page.waitForNetworkIdle();
 
-            const row = await page.waitForSelector('tbody tr:first-child');
-            await row.hover();
+        const row = await page.waitForSelector('tbody tr:first-child');
+        await row.hover();
 
-            const icon = await page.waitForSelector('tbody tr:first-child a.actionRowEvolution');
-            await icon.click();
+        const icon = await page.waitForSelector('tbody tr:first-child a.actionRowEvolution');
+        await icon.click();
 
-            await page.waitForSelector('.ui-dialog');
-            await page.waitForNetworkIdle();
+        await page.waitForSelector('.ui-dialog');
+        await page.waitForNetworkIdle();
 
-            // test succeeds if the element is present
-            await page.waitForSelector('.ui-dialog > .ui-dialog-content > div.rowevolution');
+        // test succeeds if the element is present
+        await page.waitForSelector('.ui-dialog > .ui-dialog-content > div.rowevolution');
     });
 
     it('should load the segmented visitor log correctly when a segment is selected', async function() {
